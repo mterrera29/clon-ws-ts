@@ -1,0 +1,17 @@
+.containerAll {
+  margin: 20px;
+}
+
+.container {
+  background-color: #ece5dd;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 280px;
+  height: 490px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  background-image: url('./assets/bg-whatsapp.jpg');
+  position: relative;
+}
