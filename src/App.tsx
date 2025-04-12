@@ -10,11 +10,12 @@ import useAIResponse from './hooks/useAIResponse';
 function App() {
   const date = Date.now();
   const { loading, AiResponse, fetchData } = useAIResponse();
-  const [caracter, setCaracter] = useState('Manuel Belgrano');
+  console.log(AiResponse);
+  const [caracter, setCaracter] = useState('San Martín');
   const [messages, setMessages] = useState([
     {
       date: new Date(date),
-      content: `Hola! soy ${caracter}, podés preguntarme lo que quieras`,
+      content: `Hola! hablemos`,
       user: `${caracter}`,
     },
   ]);

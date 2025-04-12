@@ -26,14 +26,14 @@ export default function useAIResponse() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              model: 'google/gemma-3-4b-it:free',
+              model: 'deepseek/deepseek-chat-v3-0324:free',
               messages: [
                 {
                   role: 'user',
                   content: [
                     {
                       type: 'text',
-                      text: `"Vos sos ${caracter}. Estás usando WhatsApp en el siglo XXI. Respondé mensajes como si fueras vos. Mantené tu personalidad seria, tus ideas y tu historia. respuiestas cortas no mas de dos oraciones, con datos historicos reales, podes buscar aca https://es.wikipedia.org/wiki/Manuel_Belgrano, responde sobre lo que te pregunto"
+                      text: `"Vos sos ${caracter}. HABLA EN PRIMERA PERSONA. Mantené tu personalidad seria, tus ideas y tu historia. respuiestas cortas no mas de dos oraciones, no uses comillas, no me muestres las fuentes, hablas como si fuera con datos historicos reales, podes buscar aca https://es.wikipedia.org/ responde sobre lo que te pregunto"
                   
                     Pregunta del alumno: "${message}"`,
                     },
