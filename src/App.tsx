@@ -1,45 +1,43 @@
 import { useEffect, useState } from 'react';
 import './App.css';
-import GenerateData from './data';
 import { Message } from './types';
 import Header from './components/Header';
 import Chat from './components/Chat';
 import MessageInput from './components/MessageInput';
-import useAIResponse from './hooks/useAIResponse';
+import { useAIStore } from './store/store';
 
 function App() {
   const date = Date.now();
-  const { loading, AiResponse, fetchData } = useAIResponse();
-  console.log(AiResponse);
-  const [caracter, setCaracter] = useState('San Martín');
-  const [messages, setMessages] = useState([
-    {
-      date: new Date(date),
-      content: `Hola! hablemos`,
-      user: `${caracter}`,
-    },
-  ]);
+  const [caracter, setCaracter] = useState('Poseidon');
+  const generateRecipe = useAIStore((state) => state.generateRecipe);
+  const recipe = useAIStore((state) => state.recipe);
+  const isGenerating = useAIStore((state) => state.isGenerating);
+  console.log(recipe);
+
+  const [messages, setMessages] = useState<Message[]>([]);
+  /* {
+    date: new Date(date),
+    content: `Hola! hablemos`,
+    user: `${caracter}`,
+  } */
   const users: string[] = [];
-  console.log(GenerateData().messages);
 
   const handleNewMessage = (message: Message) => {
     setMessages((prevState) => [...prevState, message]);
     setTimeout(() => {}, 100);
-    fetchData(message.content, caracter);
+    generateRecipe(message.content, caracter);
   };
 
   useEffect(() => {
-    if (AiResponse) {
+    if (recipe) {
       const msg: Message = {
         date: new Date(date),
         user: caracter,
-        content: AiResponse,
+        content: recipe,
       };
       setMessages((prevState) => [...prevState, msg]);
     }
-  }, [AiResponse]);
-
-  console.log(AiResponse);
+  }, [recipe]);
 
   messages.map((messages) => {
     const isUser = users.includes(messages.user);
@@ -55,7 +53,7 @@ function App() {
   return (
     <section className='container'>
       <Header caracter={caracter} />
-      <Chat messages={messages} users={users} loading={loading} />
+      <Chat messages={messages} users={users} loading={isGenerating} />
       <MessageInput handleNewMessage={handleNewMessage} />
     </section>
   );

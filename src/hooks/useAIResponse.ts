@@ -7,7 +7,6 @@ export default function useAIResponse() {
   const API_KEY = import.meta.env.VITE_API_KEY;
 
   const fetchData = async (caracter: string, message: string) => {
-    console.log(message);
     setLoading(true);
     setAiResponse('');
 
@@ -26,15 +25,23 @@ export default function useAIResponse() {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              model: 'deepseek/deepseek-chat-v3-0324:free',
+              model: 'google/gemma-3-27b-it:free',
               messages: [
                 {
                   role: 'user',
                   content: [
                     {
                       type: 'text',
-                      text: `"Vos sos ${caracter}. HABLA EN PRIMERA PERSONA. Mantené tu personalidad seria, tus ideas y tu historia. respuiestas cortas no mas de dos oraciones, no uses comillas, no me muestres las fuentes, hablas como si fuera con datos historicos reales, podes buscar aca https://es.wikipedia.org/ responde sobre lo que te pregunto"
-                  
+                      text: `"Eres "${caracter}. Actúa como una deidad griega en un chat informal. Reglas estrictas:
+                    1. **Formato**: Solo responde el texto en primera persona (nada de "Zeus:", notas o paréntesis).
+                    2. **Longitud**: 2-3 oraciones máximo.
+                    3. **Tono**: Natural pero con autoridad divina. Evita lo teatral.
+                    4. **Contenido**: Basado en mitos reales, pero sin citar fuentes.
+                    5. **Emojis**: Máximo 1 por respuesta (solo ⚡️🌪️🏛️🦉 si son relevantes).
+                    6. **Personalidad**: Adecúa respuestas al dios seleccionado (ej: Hades es seco, Afrodita coqueta).
+                    Ejemplos válidos:
+                    - Tu audacia me divierte, mortal. Pero cuidado, mi rayo no perdona.
+                    - El Olimpo tiembla con tu pregunta. Formula mejor tu petición.
                     Pregunta del alumno: "${message}"`,
                     },
                   ],
