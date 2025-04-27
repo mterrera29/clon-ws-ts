@@ -1,0 +1,86 @@
+.containerAll {
+  margin: 20px;
+}
+
+.headerContainer {
+  background-color: #075e55;
+  height: 45px;
+  padding: 5px;
+  padding-left: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  color: #dfe9e8;
+}
+
+.headerItemsLeft {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.headerItemsRight {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+}
+
+.backIcon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.headerIcons {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  margin-left: 10px;
+}
+
+.headerIconsDots {
+  width: 20px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  margin-left: 7px;
+}
+
+.containerProfile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.containerProfile img {
+  background-color: #dfe9e8;
+  height: 32px;
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+  margin-left: 1px;
+}
+
+.userName {
+  font-size: 16px;
+  color: #dfe9e8;
+  font-weight: bold;
+}
+
+.lastSeen {
+  font-size: 10px;
+  color: #dfe9e8;
+}
+
+.iconX {
+  width: 26px;
+  height: 26px;
+  fill: #dfe9e8;
+}

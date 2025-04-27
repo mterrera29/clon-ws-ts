@@ -12,6 +12,8 @@
   "dependencies": {
     "@openrouter/ai-sdk-provider": "^0.4.5",
     "ai": "^4.3.10",
+    "animate.css": "^4.1.1",
+    "framer-motion": "^12.9.2",
     "openai": "^4.93.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

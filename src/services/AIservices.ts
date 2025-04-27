@@ -13,6 +13,7 @@ export default {
       temperature: 1,
     });
     await result.consumeStream();
+    console.log(result.text);
     return result.text;
   },
 };

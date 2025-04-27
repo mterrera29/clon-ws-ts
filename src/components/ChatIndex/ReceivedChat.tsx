@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { formatearHora, marginUser } from '../helpers';
+import { formatearHora, marginUser } from '../../helpers';
 import './ReceivedChat.css';
 
 type ReceivedChatProps = {

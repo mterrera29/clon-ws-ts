@@ -1,0 +1,40 @@
+.containerAll {
+  margin: 20px;
+}
+
+.container {
+  background-color: #ece5dd;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 280px;
+  height: 490px;
+  display: flex;
+  flex-direction: column;
+  align-self: flex-start;
+  background-image: url('./assets/bg-whatsapp.jpg');
+  position: relative;
+  overflow: hidden;
+}
+
+.chatsContainer {
+  background-color: #dfe9e8;
+  overflow: scroll;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+.chatsContainer::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Edge */
+}
+
+@keyframes subir {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

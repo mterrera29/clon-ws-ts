@@ -1,15 +1,15 @@
-import './Header.css';
-import img from '../assets/belgrano.jpg';
-
+import styles from './Header.module.css';
 type HeaderProps = {
   caracter: string;
+  img: string;
+  handleBack: () => void;
 };
 
-export default function Header({ caracter }: HeaderProps) {
+export default function Header({ caracter, img, handleBack }: HeaderProps) {
   return (
-    <header className='headerContainer'>
-      <section className='headerItemsLeft'>
-        <div className='backIcon'>
+    <header className={styles.headerContainer}>
+      <section className={styles.headerItemsLeft}>
+        <div onClick={() => handleBack()} className={styles.backIcon}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30'
@@ -24,15 +24,15 @@ export default function Header({ caracter }: HeaderProps) {
             />
           </svg>
         </div>
-        <div>
-          <img className='containerProfile' src={img} alt='' />
+        <div className={styles.containerProfile}>
+          <img src={img} alt='' />
         </div>
         <div>
-          <div className='userName'>{caracter} </div>
+          <div className={styles.userName}>{caracter} </div>
         </div>
       </section>
-      <section className='headerItemsRight'>
-        <div className='headerIconsDots'>
+      <section className={styles.headerItemsRight}>
+        <div className={styles.headerIconsDots}>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='30'

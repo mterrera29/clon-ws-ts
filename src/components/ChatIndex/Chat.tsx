@@ -1,6 +1,6 @@
 import ReceivedChat from './ReceivedChat';
-import { Message } from '../types';
-import { getShuffledColors, formatDay } from '../helpers';
+import { Message } from '../../types';
+import { getShuffledColors, formatDay } from '../../helpers';
 import { useEffect, useMemo, useRef } from 'react';
 import './Chat.css';
 import WritingSpinner from './WritingSpinner';
@@ -12,6 +12,7 @@ type ChatsProps = {
 };
 
 export default function Chat({ messages, users, loading }: ChatsProps) {
+  console.log(users);
   const dateNow = Date.now();
   const randomColorsArray = useMemo(() => getShuffledColors(), []);
   const prevDay: string[] = [];

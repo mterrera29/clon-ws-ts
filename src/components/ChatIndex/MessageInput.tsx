@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Message } from '../types';
+import { Message } from '../../types';
 
 type MessageInputProps = {
   handleNewMessage: (message: Message) => void;
