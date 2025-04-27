@@ -11,7 +11,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  color: #dfe9e8;
+  color: #ece5dd;
 }
 
 .headerItemsLeft {
@@ -56,7 +56,7 @@
 }
 
 .containerProfile {
-  background-color: #dfe9e8;
+  background-color: #ece5dd;
   height: 32px;
   width: 32px;
   border-radius: 50%;
@@ -66,13 +66,13 @@
 
 .userName {
   font-size: 16px;
-  color: #dfe9e8;
+  color: #ece5dd;
   font-weight: bold;
 }
 
 .lastSeen {
   font-size: 10px;
-  color: #dfe9e8;
+  color: #ece5dd;
 }
 
 .iconX {
