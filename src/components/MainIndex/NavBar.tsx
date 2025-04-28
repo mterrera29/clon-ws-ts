@@ -19,7 +19,7 @@ export default function NavBar() {
         </div>
       </section>
       <section className={styles.headerItemsRight}>
-        <nav style={{ borderBottom: 'solid 2px white' }}>
+        <nav style={{ borderBottom: 'solid 2px #ece5dd' }}>
           <p>CHATS</p>
         </nav>
         <nav>

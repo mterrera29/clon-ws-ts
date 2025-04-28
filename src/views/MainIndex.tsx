@@ -6,11 +6,12 @@ import ChatCaracter from '../components/MainIndex/ChatCaracter';
 import { DATA } from '../data/data';
 import { Caracter } from '../types';
 import ChatIndex from './ChatIndex';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 export default function MainIndex() {
   const [caracter] = useState(DATA);
   const [caracterSelect, setCaracterSelect] = useState<Caracter>({
+    id: 0,
     caracter: '',
     img: '',
   });

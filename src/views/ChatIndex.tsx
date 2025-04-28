@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './ChatIndex.module.css';
 import { Caracter, Message } from '../types';
 import Chat from '../components/ChatIndex/Chat';
@@ -11,34 +11,32 @@ type ChatIndexProps = {
 };
 
 function ChatIndex({ caracterSelect, handleSelect }: ChatIndexProps) {
-  const date = Date.now();
   const [caracter] = useState(caracterSelect.caracter);
   const generateRecipe = useAIStore((state) => state.generateRecipe);
-  const recipe = useAIStore((state) => state.recipe);
   const isGenerating = useAIStore((state) => state.isGenerating);
   const handleBack = () => {
-    handleSelect({ caracter: '', img: '' });
+    handleSelect({ id: 0, caracter: '', img: '' });
   };
 
-  const [messages, setMessages] = useState<Message[]>([]);
+  console.log(caracterSelect);
+
+  const messages = useAIStore((state) => state.messages);
+  const createMessages = useAIStore((state) => state.createMessages);
   const users: string[] = [];
+  const messagesFilter = messages.filter((msg) => msg.id === caracterSelect.id);
+  console.log(caracterSelect);
 
   const handleNewMessage = (message: Message) => {
-    setMessages((prevState) => [...prevState, message]);
+    const msg: Message = {
+      id: caracterSelect.id,
+      date: message.date,
+      user: message.user,
+      content: message.content,
+    };
+    createMessages(msg);
     setTimeout(() => {}, 100);
-    generateRecipe(message.content, caracter);
+    generateRecipe(message.content, caracterSelect);
   };
-
-  useEffect(() => {
-    if (recipe) {
-      const msg: Message = {
-        date: new Date(date),
-        user: caracter,
-        content: recipe,
-      };
-      setMessages((prevState) => [...prevState, msg]);
-    }
-  }, [recipe]);
 
   messages.map((messages) => {
     const isUser = users.includes(messages.user);
@@ -58,7 +56,7 @@ function ChatIndex({ caracterSelect, handleSelect }: ChatIndexProps) {
         img={caracterSelect.img}
         handleBack={handleBack}
       />
-      <Chat messages={messages} users={users} loading={isGenerating} />
+      <Chat messages={messagesFilter} users={users} loading={isGenerating} />
       <MessageInput handleNewMessage={handleNewMessage} />
     </section>
   );

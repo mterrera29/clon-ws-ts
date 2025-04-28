@@ -12,7 +12,6 @@ type ChatsProps = {
 };
 
 export default function Chat({ messages, users, loading }: ChatsProps) {
-  console.log(users);
   const dateNow = Date.now();
   const randomColorsArray = useMemo(() => getShuffledColors(), []);
   const prevDay: string[] = [];
