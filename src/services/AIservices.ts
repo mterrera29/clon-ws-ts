@@ -11,7 +11,8 @@ export default {
         `Debes responder como si fueras el dios griego ${god}` +
         'Tus respuestas se deben acotar a dos parrafos no muy largos' +
         'responder en primera persona' +
-        'podes usar emoticones seris como simbolos, no caritas',
+        'podes usar emoticones seris como simbolos, no caritas' +
+        'si no te lo preguntan no digas quien sos',
       temperature: 1,
     });
     await result.consumeStream();

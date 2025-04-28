@@ -26,7 +26,7 @@ function ChatIndex({ caracterSelect, handleSelect }: ChatIndexProps) {
   const messagesFilter = messages.filter((msg) => msg.id === caracterSelect.id);
   console.log(caracterSelect);
 
-  const handleNewMessage = (message: Message) => {
+  const handleNewMessage = (message: Omit<Message, 'id'>) => {
     const msg: Message = {
       id: caracterSelect.id,
       date: message.date,

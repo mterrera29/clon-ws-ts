@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { Message } from '../../types';
 
 type MessageInputProps = {
-  handleNewMessage: (message: Message) => void;
+  handleNewMessage: (message: Omit<Message, 'id'>) => void;
 };
 
 export default function MessageInput({ handleNewMessage }: MessageInputProps) {
@@ -15,7 +15,7 @@ export default function MessageInput({ handleNewMessage }: MessageInputProps) {
     if (text.length === 0) return;
     const user = 'You';
     const content = text;
-    const msg: Message = {
+    const msg: Omit<Message, 'id'> = {
       date: new Date(date),
       user: user,
       content: content,
