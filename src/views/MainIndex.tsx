@@ -1,7 +1,7 @@
 import style from './MainIndex.module.css';
 import Header from '../components/MainIndex/Header';
 import NavBar from '../components/MainIndex/NavBar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChatCaracter from '../components/MainIndex/ChatCaracter';
 import { DATA } from '../data/data';
 import { Caracter } from '../types';
@@ -16,23 +16,29 @@ export default function MainIndex() {
     img: '',
     date: undefined,
   });
+  const [sortedCaracter, setSortedCaracter] = useState<Caracter[]>([]);
 
   const handleSelect = (caracter: Caracter) => {
     setCaracterSelect(caracter);
   };
 
-  const sortedDateCaracter = [...caracter].sort((a, b) => {
-    const timeA = a.date?.getTime() ?? -Infinity;
-    const timeB = b.date?.getTime() ?? -Infinity;
-    return timeB - timeA;
-  });
+  useEffect(() => {
+    const sortedDateCaracter = [...caracter].sort((a, b) => {
+      const timeA = a.date?.getTime() ?? -Infinity;
+      const timeB = b.date?.getTime() ?? -Infinity;
+      return timeB - timeA;
+    });
+    setSortedCaracter(sortedDateCaracter);
+  }, []);
+
+  console.log(sortedCaracter);
 
   return (
     <div className={style.container}>
       <Header />
       <div className={style.chatsContainer}>
         <NavBar />
-        {sortedDateCaracter.map((caracter) => (
+        {sortedCaracter.map((caracter) => (
           <ChatCaracter
             caracter={caracter}
             handleSelect={handleSelect}

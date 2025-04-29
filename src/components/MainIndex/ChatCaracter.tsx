@@ -16,7 +16,7 @@ export default function ChatCaracter({
   const messagesFilter = messages.filter((msg) => msg.id === caracter.id);
   const dateNow = Date.now();
   const lastMessage = messagesFilter[messagesFilter.length - 1];
-
+  console.log(lastMessage);
   const day = lastMessage
     ? formatDay(lastMessage.date) === formatDay(new Date(dateNow))
       ? formatearHora(lastMessage.date)
