@@ -9,4 +9,5 @@ export type Caracter = {
   id: number;
   caracter: string;
   img: string;
+  date: Date | undefined;
 };

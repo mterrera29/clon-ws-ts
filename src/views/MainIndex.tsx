@@ -9,23 +9,30 @@ import ChatIndex from './ChatIndex';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainIndex() {
-  const [caracter] = useState(DATA);
+  const [caracter, setCaracter] = useState<Caracter[]>(DATA);
   const [caracterSelect, setCaracterSelect] = useState<Caracter>({
     id: 0,
     caracter: '',
     img: '',
+    date: undefined,
   });
 
   const handleSelect = (caracter: Caracter) => {
     setCaracterSelect(caracter);
   };
 
+  const sortedDateCaracter = [...caracter].sort((a, b) => {
+    const timeA = a.date?.getTime() ?? -Infinity;
+    const timeB = b.date?.getTime() ?? -Infinity;
+    return timeB - timeA;
+  });
+
   return (
     <div className={style.container}>
       <Header />
       <div className={style.chatsContainer}>
         <NavBar />
-        {caracter.map((caracter) => (
+        {sortedDateCaracter.map((caracter) => (
           <ChatCaracter
             caracter={caracter}
             handleSelect={handleSelect}
@@ -43,6 +50,7 @@ export default function MainIndex() {
             transition={{ duration: 0.4, ease: 'easeInOut' }}
           >
             <ChatIndex
+              setCaracter={setCaracter}
               caracterSelect={caracterSelect}
               handleSelect={handleSelect}
             />

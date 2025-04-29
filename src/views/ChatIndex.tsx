@@ -8,40 +8,25 @@ import { useAIStore } from '../store/store';
 type ChatIndexProps = {
   caracterSelect: Caracter;
   handleSelect: (caracter: Caracter) => void;
+  setCaracter: React.Dispatch<React.SetStateAction<Caracter[]>>;
 };
 
-function ChatIndex({ caracterSelect, handleSelect }: ChatIndexProps) {
+function ChatIndex({
+  caracterSelect,
+  handleSelect,
+  setCaracter,
+}: ChatIndexProps) {
   const [caracter] = useState(caracterSelect.caracter);
   const generateRecipe = useAIStore((state) => state.generateRecipe);
   const isGenerating = useAIStore((state) => state.isGenerating);
   const handleBack = () => {
-    handleSelect({ id: 0, caracter: '', img: '' });
+    handleSelect({ id: 0, caracter: '', img: '', date: undefined });
   };
-
-  console.log(caracterSelect);
 
   const messages = useAIStore((state) => state.messages);
   const createMessages = useAIStore((state) => state.createMessages);
   const users: string[] = [];
   const messagesFilter = messages.filter((msg) => msg.id === caracterSelect.id);
-  console.log(messages);
-
-  function ordenarArray(
-    array: { id: number; date?: Date; user: string; content: string }[]
-  ) {
-    const conDate = array
-      .filter((item) => item.date)
-      .sort((a, b) => b.date!.getTime() - a.date!.getTime());
-    const sinDate = array
-      .filter((item) => !item.date)
-      .sort((a, b) => b.id - a.id);
-    const resultado = Array.from(
-      new Set([...conDate, ...sinDate].map((item) => item.id))
-    );
-
-    return resultado;
-  }
-  console.log(ordenarArray(messages));
 
   const handleNewMessage = (message: Omit<Message, 'id'>) => {
     const msg: Message = {
@@ -50,6 +35,11 @@ function ChatIndex({ caracterSelect, handleSelect }: ChatIndexProps) {
       user: message.user,
       content: message.content,
     };
+    setCaracter((prev) => {
+      return prev.map((obj) =>
+        obj.id === caracterSelect.id ? { ...obj, date: message.date } : obj
+      );
+    });
     createMessages(msg);
     setTimeout(() => {}, 100);
     generateRecipe(message.content, caracterSelect);
