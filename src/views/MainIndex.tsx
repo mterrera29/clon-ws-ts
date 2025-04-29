@@ -9,7 +9,9 @@ import ChatIndex from './ChatIndex';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainIndex() {
-  const [caracter, setCaracter] = useState<Caracter[]>(DATA);
+  //CARACTER NO QUEDA GUARDADO EN LOCAL STORAGE POR ESO CAMBIA SIN SINCRONIZARSE CON ESO
+  const localCaracter = JSON.parse(localStorage.getItem('caracter'));
+  const [caracter, setCaracter] = useState<Caracter[]>(localCaracter || DATA);
   const [caracterSelect, setCaracterSelect] = useState<Caracter>({
     id: 0,
     caracter: '',
@@ -23,13 +25,20 @@ export default function MainIndex() {
   };
 
   useEffect(() => {
-    const sortedDateCaracter = [...caracter].sort((a, b) => {
+    const caracterDate = caracter.map((item) => ({
+      ...item,
+      date: item.date ? new Date(item.date) : null,
+    }));
+
+    const sortedDateCaracter = [...caracterDate].sort((a, b) => {
       const timeA = a.date?.getTime() ?? -Infinity;
       const timeB = b.date?.getTime() ?? -Infinity;
       return timeB - timeA;
     });
+
     setSortedCaracter(sortedDateCaracter);
-  }, []);
+    localStorage.setItem('caracter', JSON.stringify(caracter));
+  }, [caracter]);
 
   console.log(sortedCaracter);
 
