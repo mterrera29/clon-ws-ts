@@ -24,7 +24,24 @@ function ChatIndex({ caracterSelect, handleSelect }: ChatIndexProps) {
   const createMessages = useAIStore((state) => state.createMessages);
   const users: string[] = [];
   const messagesFilter = messages.filter((msg) => msg.id === caracterSelect.id);
-  console.log(caracterSelect);
+  console.log(messages);
+
+  function ordenarArray(
+    array: { id: number; date?: Date; user: string; content: string }[]
+  ) {
+    const conDate = array
+      .filter((item) => item.date)
+      .sort((a, b) => b.date!.getTime() - a.date!.getTime());
+    const sinDate = array
+      .filter((item) => !item.date)
+      .sort((a, b) => b.id - a.id);
+    const resultado = Array.from(
+      new Set([...conDate, ...sinDate].map((item) => item.id))
+    );
+
+    return resultado;
+  }
+  console.log(ordenarArray(messages));
 
   const handleNewMessage = (message: Omit<Message, 'id'>) => {
     const msg: Message = {

@@ -2,6 +2,18 @@
   margin: 20px;
 }
 
+.chatOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white; /* o semi-transparente si querés */
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+
 .container {
   background-color: #ece5dd;
   background-size: cover;
@@ -15,6 +27,8 @@
   background-image: url('./assets/bg-whatsapp.jpg');
   position: relative;
   overflow: hidden;
+  position: relative; /* AÑADIR ESTO */
+  overflow: hidden; /* Evita que se desborde cuando se anima */
 }
 
 .chatsContainer {

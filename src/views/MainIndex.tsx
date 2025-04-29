@@ -6,7 +6,7 @@ import ChatCaracter from '../components/MainIndex/ChatCaracter';
 import { DATA } from '../data/data';
 import { Caracter } from '../types';
 import ChatIndex from './ChatIndex';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainIndex() {
   const [caracter] = useState(DATA);
@@ -15,7 +15,6 @@ export default function MainIndex() {
     caracter: '',
     img: '',
   });
-  console.log(caracterSelect);
 
   const handleSelect = (caracter: Caracter) => {
     setCaracterSelect(caracter);
@@ -23,34 +22,33 @@ export default function MainIndex() {
 
   return (
     <div className={style.container}>
-      {caracterSelect.caracter === '' ? (
-        <>
-          <Header />
-          <div className={style.chatsContainer}>
-            <NavBar />
-            {caracter.map((caracter) => (
-              <ChatCaracter
-                caracter={caracter}
-                handleSelect={handleSelect}
-                key={caracter.caracter}
-              />
-            ))}
-          </div>
-        </>
-      ) : (
-        <motion.div
-          className={style.container}
-          initial={{ y: 300, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          exit={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.2, ease: 'easeIn' }}
-        >
-          <ChatIndex
-            caracterSelect={caracterSelect}
+      <Header />
+      <div className={style.chatsContainer}>
+        <NavBar />
+        {caracter.map((caracter) => (
+          <ChatCaracter
+            caracter={caracter}
             handleSelect={handleSelect}
+            key={caracter.id}
           />
-        </motion.div>
-      )}
+        ))}
+      </div>
+      <AnimatePresence>
+        {caracterSelect.caracter !== '' && (
+          <motion.div
+            className={style.chatOverlay}
+            initial={{ y: '100%' }}
+            animate={{ y: 0 }}
+            exit={{ y: '100%' }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+          >
+            <ChatIndex
+              caracterSelect={caracterSelect}
+              handleSelect={handleSelect}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
