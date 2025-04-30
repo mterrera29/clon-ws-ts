@@ -20,7 +20,7 @@ function ChatIndex({
   const generateRecipe = useAIStore((state) => state.generateRecipe);
   const isGenerating = useAIStore((state) => state.isGenerating);
   const handleBack = () => {
-    handleSelect({ id: 0, caracter: '', img: '', date: undefined });
+    handleSelect({ id: 0, caracter: '', img: '', date: null });
   };
 
   const messages = useAIStore((state) => state.messages);

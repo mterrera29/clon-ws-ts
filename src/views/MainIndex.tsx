@@ -9,14 +9,14 @@ import ChatIndex from './ChatIndex';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function MainIndex() {
-  //CARACTER NO QUEDA GUARDADO EN LOCAL STORAGE POR ESO CAMBIA SIN SINCRONIZARSE CON ESO
-  const localCaracter = JSON.parse(localStorage.getItem('caracter'));
+  const item = localStorage.getItem('caracter');
+  const localCaracter = item ? JSON.parse(item) : null;
   const [caracter, setCaracter] = useState<Caracter[]>(localCaracter || DATA);
   const [caracterSelect, setCaracterSelect] = useState<Caracter>({
     id: 0,
     caracter: '',
     img: '',
-    date: undefined,
+    date: null,
   });
   const [sortedCaracter, setSortedCaracter] = useState<Caracter[]>([]);
 
@@ -25,7 +25,7 @@ export default function MainIndex() {
   };
 
   useEffect(() => {
-    const caracterDate = caracter.map((item) => ({
+    const caracterDate: Caracter[] = caracter.map((item) => ({
       ...item,
       date: item.date ? new Date(item.date) : null,
     }));
@@ -43,35 +43,43 @@ export default function MainIndex() {
   console.log(sortedCaracter);
 
   return (
-    <div className={style.container}>
-      <Header />
-      <div className={style.chatsContainer}>
-        <NavBar />
-        {sortedCaracter.map((caracter) => (
-          <ChatCaracter
-            caracter={caracter}
-            handleSelect={handleSelect}
-            key={caracter.id}
-          />
-        ))}
-      </div>
-      <AnimatePresence>
-        {caracterSelect.caracter !== '' && (
-          <motion.div
-            className={style.chatOverlay}
-            initial={{ y: '100%' }}
-            animate={{ y: 0 }}
-            exit={{ y: '100%' }}
-            transition={{ duration: 0.4, ease: 'easeInOut' }}
-          >
-            <ChatIndex
-              setCaracter={setCaracter}
-              caracterSelect={caracterSelect}
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <div className={style.container}>
+        <Header />
+        <div className={style.chatsContainer}>
+          <NavBar />
+          {sortedCaracter.map((caracter) => (
+            <ChatCaracter
+              caracter={caracter}
               handleSelect={handleSelect}
+              key={caracter.id}
             />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          ))}
+        </div>
+        <AnimatePresence>
+          {caracterSelect.caracter !== '' && (
+            <motion.div
+              className={style.chatOverlay}
+              initial={{ y: '100%' }}
+              animate={{ y: 0 }}
+              exit={{ y: '100%' }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
+              <ChatIndex
+                setCaracter={setCaracter}
+                caracterSelect={caracterSelect}
+                handleSelect={handleSelect}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </div>
   );
 }
